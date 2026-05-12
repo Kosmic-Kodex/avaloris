@@ -14,9 +14,10 @@
       min-height: 100vh;
       font-family: system-ui, sans-serif;
       background:
-        radial-gradient(circle at 20% 0%, rgba(88, 166, 255, 0.18), transparent 35%),
-        radial-gradient(circle at 80% 20%, rgba(180, 80, 255, 0.12), transparent 30%),
-        #05070c;
+        radial-gradient(circle at 18% 0%, rgba(88, 166, 255, 0.24), transparent 42%),
+        radial-gradient(circle at 82% 18%, rgba(190, 90, 255, 0.18), transparent 36%),
+        radial-gradient(circle at 50% 100%, rgba(127, 255, 212, 0.08), transparent 34%),
+        linear-gradient(to bottom, #0a1020, #070b14);
       color: #e6edf3;
       display: flex;
       align-items: center;
@@ -29,19 +30,34 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.04;
-      background-image: linear-gradient(rgba(255,255,255,.4) 1px, transparent 1px);
+      opacity: 0.045;
+      background-image: linear-gradient(rgba(255,255,255,.45) 1px, transparent 1px);
       background-size: 100% 4px;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image:
+        radial-gradient(1px 1px at 20% 30%, #ffffff, transparent),
+        radial-gradient(1px 1px at 75% 25%, #7fffd4, transparent),
+        radial-gradient(1px 1px at 45% 70%, #58a6ff, transparent),
+        radial-gradient(1px 1px at 85% 80%, #d66bff, transparent);
     }
 
     .container {
       width: 100%;
-      max-width: 820px;
+      max-width: 860px;
       padding: 34px;
-      border: 1px solid rgba(88, 166, 255, 0.22);
+      border: 1px solid rgba(88, 166, 255, 0.25);
       border-radius: 18px;
-      background: rgba(8, 12, 20, 0.74);
-      box-shadow: 0 0 60px rgba(88, 166, 255, 0.08);
+      background: rgba(10, 15, 26, 0.78);
+      box-shadow:
+        0 0 60px rgba(88, 166, 255, 0.10),
+        inset 0 0 40px rgba(255,255,255,0.015);
       backdrop-filter: blur(12px);
     }
 
@@ -51,6 +67,12 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-bottom: 14px;
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.62; }
+      50% { opacity: 1; }
     }
 
     h1 {
@@ -58,11 +80,13 @@
       font-size: clamp(42px, 9vw, 76px);
       letter-spacing: 8px;
       line-height: 1;
-      text-shadow: 0 0 22px rgba(88, 166, 255, 0.38);
+      text-shadow:
+        0 0 18px rgba(88, 166, 255, 0.30),
+        0 0 42px rgba(88, 166, 255, 0.14);
     }
 
     .tagline {
-      color: #8b949e;
+      color: #a1adbd;
       margin: 18px 0 34px;
       line-height: 1.7;
       max-width: 620px;
@@ -75,10 +99,29 @@
     }
 
     .card {
-      background: rgba(17, 24, 35, 0.82);
-      border: 1px solid rgba(120, 160, 255, 0.16);
+      min-height: 150px;
+      background: rgba(17, 24, 35, 0.88);
+      border: 1px solid rgba(120, 160, 255, 0.18);
       padding: 20px;
       border-radius: 14px;
+      transition: 0.25s ease;
+    }
+
+    .card:nth-child(1) {
+      border-color: rgba(127, 255, 212, 0.28);
+    }
+
+    .card:nth-child(2) {
+      border-color: rgba(88, 166, 255, 0.28);
+    }
+
+    .card:nth-child(3) {
+      border-color: rgba(190, 90, 255, 0.28);
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(88, 166, 255, 0.10);
     }
 
     .label {
@@ -86,10 +129,27 @@
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
     }
 
-    .card div:not(.label) {
+    .identity-row {
+      margin-bottom: 14px;
+    }
+
+    .identity-name {
+      display: block;
+      color: #e6edf3;
+      font-weight: 650;
+    }
+
+    .identity-role {
+      display: block;
+      color: #8b949e;
+      font-size: 14px;
+      margin-top: 3px;
+    }
+
+    .card-text {
       line-height: 1.7;
     }
 
@@ -104,10 +164,25 @@
 
     footer {
       margin-top: 26px;
-      color: #6e7681;
+      color: #7b8798;
       font-size: 13px;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(255,255,255,0.07);
       padding-top: 18px;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 18px;
+        align-items: flex-start;
+      }
+
+      .container {
+        padding: 26px;
+      }
+
+      h1 {
+        letter-spacing: 4px;
+      }
     }
   </style>
 </head>
@@ -125,19 +200,31 @@
 
     <section class="grid">
       <div class="card">
-        <div class="label">Alias</div>
-        <div>Apollo — nickname</div>
-        <div>Kosmic Kodex — development handle</div>
+        <div class="label">Identity</div>
+
+        <div class="identity-row">
+          <span class="identity-name">Apollo</span>
+          <span class="identity-role">public alias</span>
+        </div>
+
+        <div class="identity-row">
+          <span class="identity-name">Kosmic Kodex</span>
+          <span class="identity-role">development handle</span>
+        </div>
       </div>
 
       <div class="card">
         <div class="label">Contact</div>
-        <div><a href="mailto:apollo@avaloris.net">apollo@avaloris.net</a></div>
+        <div class="card-text">
+          <a href="mailto:apollo@avaloris.net">apollo@avaloris.net</a>
+        </div>
       </div>
 
       <div class="card">
         <div class="label">Projects</div>
-        <div>Coming soon — systems, tools, and experiments hosted here.</div>
+        <div class="card-text">
+          Coming soon — systems, tools, and experiments hosted here.
+        </div>
       </div>
     </section>
 
