@@ -284,62 +284,7 @@ body::after {
   }
 }
 
-    .spotify-toggle {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 20;
 
-  border: 1px solid rgba(127,255,212,0.20);
-  border-radius: 999px;
-
-  background: rgba(10,14,24,0.72);
-  backdrop-filter: blur(12px);
-
-  color: #a9ffe8;
-  padding: 9px 14px;
-
-  font-size: 12px;
-  letter-spacing: 0.5px;
-
-  cursor: pointer;
-
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    background 0.2s ease;
-}
-
-.spotify-toggle:hover {
-  transform: translateY(-2px);
-  border-color: rgba(127,255,212,0.38);
-  background: rgba(16,22,36,0.86);
-}
-
-.spotify-panel {
-  position: fixed;
-  right: 18px;
-  bottom: 62px;
-
-  width: 320px;
-
-  opacity: 0;
-  transform: translateY(10px) scale(0.98);
-
-  pointer-events: none;
-
-  transition:
-    opacity 0.25s ease,
-    transform 0.25s ease;
-
-  z-index: 19;
-}
-
-.spotify-panel.open {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  pointer-events: auto;
-}
     
   </style>
 </head>
@@ -522,16 +467,5 @@ body::after {
   </iframe>
 </div>
 
-<script>
-  const spotifyToggle =
-    document.getElementById("spotify-toggle");
-
-  const spotifyPanel =
-    document.getElementById("spotify-panel");
-
-  spotifyToggle.addEventListener("click", () => {
-    spotifyPanel.classList.toggle("open");
-  });
-</script>
 </body>
 </html>
