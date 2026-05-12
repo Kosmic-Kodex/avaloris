@@ -321,7 +321,7 @@
 
   <script>
     const visitorUrl = "https://visitor-counter.kodyleem98.workers.dev";
-    const guestbookUrl = "PASTE_YOUR_GUESTBOOK_WORKER_URL_HERE";
+    const guestbookUrl = "https://avaloris-guestbook.kodyleem98.workers.dev";
 
     function formatTime(timestamp) {
       const date = new Date(timestamp);
@@ -377,9 +377,6 @@
       .then(response => response.text())
       .then(text => {
         document.getElementById("visitor-count").textContent = text;
-      })
-      .catch(() => {
-        document.getElementById("visitor-count").textContent = "Visitor count unavailable.";
       });
 
     fetch(`${guestbookUrl}/latest`)
@@ -410,12 +407,10 @@
           }
 
           document.getElementById("guestbook-form").reset();
+
           return fetch(`${guestbookUrl}/latest`)
             .then(response => response.json())
             .then(entries => renderEntries(entries, "guestbook-latest"));
-        })
-        .catch(() => {
-          alert("Could not sign guestbook.");
         });
     });
   </script>
