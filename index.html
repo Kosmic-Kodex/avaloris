@@ -209,10 +209,29 @@
         </div>
       </section>
 
+      <div class="card">
+  <div class="card-title">Visitors</div>
+  <div class="card-text" id="visitor-count">
+    Loading visitor count...
+  </div>
+</div>
+
       <footer>
         Built on Cloudflare Pages • No tracking • No analytics
       </footer>
     </main>
   </div>
+
+  <script>
+  fetch("https://visitor-counter.kodyleem98.workers.dev")
+    .then(response => response.text())
+    .then(text => {
+      document.getElementById("visitor-count").textContent = text;
+    })
+    .catch(() => {
+      document.getElementById("visitor-count").textContent = "Visitor count unavailable.";
+    });
+</script>
+  
 </body>
 </html>
