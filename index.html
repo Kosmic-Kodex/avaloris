@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Avaloris</title>
+
   <style>
     * {
       box-sizing: border-box;
@@ -12,123 +13,176 @@
     body {
       margin: 0;
       min-height: 100vh;
+      overflow: hidden;
       font-family: system-ui, sans-serif;
+      color: #eef4ff;
+
       background:
-        radial-gradient(circle at 18% 0%, rgba(88, 166, 255, 0.24), transparent 42%),
-        radial-gradient(circle at 82% 18%, rgba(190, 90, 255, 0.18), transparent 36%),
-        radial-gradient(circle at 50% 100%, rgba(127, 255, 212, 0.08), transparent 34%),
-        linear-gradient(to bottom, #0a1020, #070b14);
-      color: #e6edf3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 32px;
+        radial-gradient(circle at top left, rgba(90,140,255,0.35), transparent 32%),
+        radial-gradient(circle at top right, rgba(180,90,255,0.25), transparent 28%),
+        radial-gradient(circle at bottom center, rgba(0,255,200,0.12), transparent 38%),
+        linear-gradient(180deg, #0c1224 0%, #070b14 100%);
     }
 
+    /* ambient stars */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.045;
-      background-image: linear-gradient(rgba(255,255,255,.45) 1px, transparent 1px);
-      background-size: 100% 4px;
+      opacity: 0.5;
+
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 80% 20%, rgba(127,255,212,0.7), transparent),
+        radial-gradient(1px 1px at 60% 80%, rgba(88,166,255,0.8), transparent),
+        radial-gradient(2px 2px at 40% 60%, rgba(215,120,255,0.7), transparent),
+        radial-gradient(1px 1px at 75% 75%, rgba(255,255,255,0.6), transparent);
     }
 
+    /* subtle scanlines */
     body::after {
       content: "";
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.18;
+      opacity: 0.03;
+
       background-image:
-        radial-gradient(1px 1px at 20% 30%, #ffffff, transparent),
-        radial-gradient(1px 1px at 75% 25%, #7fffd4, transparent),
-        radial-gradient(1px 1px at 45% 70%, #58a6ff, transparent),
-        radial-gradient(1px 1px at 85% 80%, #d66bff, transparent);
+        linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px);
+
+      background-size: 100% 4px;
     }
 
     .container {
+      position: relative;
+      z-index: 1;
+
       width: 100%;
-      max-width: 860px;
-      padding: 34px;
-      border: 1px solid rgba(88, 166, 255, 0.25);
-      border-radius: 18px;
-      background: rgba(10, 15, 26, 0.78);
+      max-width: 920px;
+
+      margin: 60px auto;
+      padding: 40px;
+
+      border-radius: 22px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(20,28,48,0.88),
+          rgba(10,14,24,0.92)
+        );
+
+      border: 1px solid rgba(120,160,255,0.24);
+
       box-shadow:
-        0 0 60px rgba(88, 166, 255, 0.10),
-        inset 0 0 40px rgba(255,255,255,0.015);
-      backdrop-filter: blur(12px);
+        0 0 80px rgba(88,166,255,0.12),
+        0 0 140px rgba(180,90,255,0.06),
+        inset 0 0 30px rgba(255,255,255,0.02);
+
+      backdrop-filter: blur(16px);
     }
 
     .signal {
       color: #7fffd4;
-      font-size: 13px;
-      letter-spacing: 2px;
       text-transform: uppercase;
-      margin-bottom: 14px;
-      animation: pulse 4s ease-in-out infinite;
+      letter-spacing: 2px;
+      font-size: 12px;
+
+      margin-bottom: 18px;
+
+      opacity: 0.85;
+
+      animation: pulse 4s infinite ease-in-out;
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 0.62; }
+      0%,100% { opacity: 0.5; }
       50% { opacity: 1; }
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(42px, 9vw, 76px);
-      letter-spacing: 8px;
+
+      font-size: clamp(48px, 10vw, 82px);
+
       line-height: 1;
+
+      letter-spacing: 10px;
+
+      color: white;
+
       text-shadow:
-        0 0 18px rgba(88, 166, 255, 0.30),
-        0 0 42px rgba(88, 166, 255, 0.14);
+        0 0 25px rgba(88,166,255,0.35),
+        0 0 60px rgba(88,166,255,0.14);
     }
 
     .tagline {
-      color: #a1adbd;
-      margin: 18px 0 34px;
-      line-height: 1.7;
-      max-width: 620px;
+      margin-top: 20px;
+      margin-bottom: 42px;
+
+      max-width: 700px;
+
+      color: #aeb9cc;
+
+      line-height: 1.8;
+
+      font-size: 1.05rem;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
     }
 
     .card {
-      min-height: 150px;
-      background: rgba(17, 24, 35, 0.88);
-      border: 1px solid rgba(120, 160, 255, 0.18);
-      padding: 20px;
-      border-radius: 14px;
+      padding: 22px;
+
+      border-radius: 16px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(25,35,55,0.82),
+          rgba(14,20,32,0.92)
+        );
+
+      border: 1px solid rgba(255,255,255,0.08);
+
       transition: 0.25s ease;
     }
 
+    .card:hover {
+      transform: translateY(-3px);
+
+      border-color: rgba(120,160,255,0.28);
+
+      box-shadow:
+        0 0 30px rgba(88,166,255,0.08);
+    }
+
     .card:nth-child(1) {
-      border-color: rgba(127, 255, 212, 0.28);
+      border-color: rgba(127,255,212,0.20);
     }
 
     .card:nth-child(2) {
-      border-color: rgba(88, 166, 255, 0.28);
+      border-color: rgba(88,166,255,0.22);
     }
 
     .card:nth-child(3) {
-      border-color: rgba(190, 90, 255, 0.28);
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 20px rgba(88, 166, 255, 0.10);
+      border-color: rgba(215,120,255,0.22);
     }
 
     .label {
-      color: #8b949e;
+      color: #7f8da5;
+
       font-size: 12px;
+
       text-transform: uppercase;
+
       letter-spacing: 1.5px;
+
       margin-bottom: 14px;
     }
 
@@ -138,23 +192,29 @@
 
     .identity-name {
       display: block;
-      color: #e6edf3;
+
       font-weight: 650;
+
+      color: #eef4ff;
     }
 
     .identity-role {
       display: block;
-      color: #8b949e;
+
+      margin-top: 4px;
+
+      color: #95a2b8;
+
       font-size: 14px;
-      margin-top: 3px;
     }
 
     .card-text {
       line-height: 1.7;
+      color: #dbe5f5;
     }
 
     a {
-      color: #58a6ff;
+      color: #7cbcff;
       text-decoration: none;
     }
 
@@ -163,42 +223,51 @@
     }
 
     footer {
-      margin-top: 26px;
-      color: #7b8798;
-      font-size: 13px;
-      border-top: 1px solid rgba(255,255,255,0.07);
+      margin-top: 30px;
+
       padding-top: 18px;
+
+      border-top: 1px solid rgba(255,255,255,0.06);
+
+      color: #7d899b;
+
+      font-size: 13px;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
       body {
-        padding: 18px;
-        align-items: flex-start;
+        overflow-y: auto;
       }
 
       .container {
-        padding: 26px;
+        margin: 20px;
+        padding: 28px;
       }
 
       h1 {
-        letter-spacing: 4px;
+        letter-spacing: 5px;
       }
     }
   </style>
 </head>
 
 <body>
+
   <main class="container">
-    <div class="signal">signal detected // node online</div>
+
+    <div class="signal">
+      signal detected // node online
+    </div>
 
     <h1>AVALORIS</h1>
 
     <div class="tagline">
-      A quiet digital space for experiments, systems, archives,
-      and unfinished ideas drifting through the void.
+      A quiet digital space for experiments, systems,
+      archives, and unfinished ideas drifting through the void.
     </div>
 
     <section class="grid">
+
       <div class="card">
         <div class="label">Identity</div>
 
@@ -215,22 +284,30 @@
 
       <div class="card">
         <div class="label">Contact</div>
+
         <div class="card-text">
-          <a href="mailto:apollo@avaloris.net">apollo@avaloris.net</a>
+          <a href="mailto:apollo@avaloris.net">
+            apollo@avaloris.net
+          </a>
         </div>
       </div>
 
       <div class="card">
         <div class="label">Projects</div>
+
         <div class="card-text">
-          Coming soon — systems, tools, and experiments hosted here.
+          Systems, tools, experiments, archives,
+          and strange digital artifacts will surface here over time.
         </div>
       </div>
+
     </section>
 
     <footer>
       Built on Cloudflare Pages • No tracking • No analytics
     </footer>
+
   </main>
+
 </body>
 </html>
