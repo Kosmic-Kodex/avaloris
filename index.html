@@ -251,6 +251,37 @@
       h1 { letter-spacing: 5px; }
       .guestbook-top { align-items: flex-start; flex-direction: column; }
     }
+body::after {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at 30% 30%, rgba(88,166,255,0.10), transparent 28%),
+    radial-gradient(circle at 70% 60%, rgba(180,90,255,0.08), transparent 30%),
+    radial-gradient(circle at 50% 80%, rgba(127,255,212,0.06), transparent 26%);
+
+  filter: blur(60px);
+
+  animation: drift 28s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  0% {
+    transform: translate3d(-2%, -1%, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(2%, 1%, 0) scale(1.05);
+  }
+
+  100% {
+    transform: translate3d(-1%, 2%, 0) scale(1.02);
+  }
+}
+    
   </style>
 </head>
 
