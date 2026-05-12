@@ -35,6 +35,28 @@
         radial-gradient(1px 1px at 75% 75%, rgba(255,255,255,0.45), transparent);
     }
 
+    body::after {
+      content: "";
+      position: fixed;
+      inset: -15%;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 10% 20%, rgba(88,166,255,0.24), transparent 28%),
+        radial-gradient(ellipse at 90% 25%, rgba(180,90,255,0.22), transparent 30%),
+        radial-gradient(ellipse at 20% 85%, rgba(127,255,212,0.18), transparent 28%),
+        radial-gradient(ellipse at 85% 80%, rgba(88,166,255,0.18), transparent 30%);
+      filter: blur(70px) saturate(145%);
+      opacity: 0.95;
+      animation: auroraOrbit 9s ease-in-out infinite alternate;
+    }
+
+    @keyframes auroraOrbit {
+      0% { transform: translate3d(-3%, -2%, 0) scale(1.02); }
+      50% { transform: translate3d(3%, 2%, 0) scale(1.08); }
+      100% { transform: translate3d(-2%, 3%, 0) scale(1.04); }
+    }
+
     .page {
       min-height: 100vh;
       display: flex;
@@ -105,6 +127,16 @@
       transform: translateY(-3px);
       border-color: rgba(140,170,255,0.26);
       box-shadow: 0 0 30px rgba(88,166,255,0.08);
+    }
+
+    .card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card-link:hover {
+      text-decoration: none;
     }
 
     .card-title, .section-title {
@@ -251,45 +283,6 @@
       h1 { letter-spacing: 5px; }
       .guestbook-top { align-items: flex-start; flex-direction: column; }
     }
-body::after {
-  content: "";
-  position: fixed;
-  inset: -15%;
-  z-index: -1;
-  pointer-events: none;
-
-  background:
-    radial-gradient(ellipse at 10% 20%, rgba(88,166,255,0.24), transparent 28%),
-    radial-gradient(ellipse at 90% 25%, rgba(180,90,255,0.22), transparent 30%),
-    radial-gradient(ellipse at 20% 85%, rgba(127,255,212,0.18), transparent 28%),
-    radial-gradient(ellipse at 85% 80%, rgba(88,166,255,0.18), transparent 30%);
-
-  filter: blur(70px) saturate(145%);
-  opacity: 0.95;
-
-  animation: auroraOrbit 9s ease-in-out infinite alternate;
-}
-
-@keyframes auroraOrbit {
-  0% {
-    transform: translate3d(-3%, -2%, 0) scale(1.02);
-  }
-
-  50% {
-    transform: translate3d(3%, 2%, 0) scale(1.08);
-  }
-
-  100% {
-    transform: translate3d(-2%, 3%, 0) scale(1.04);
-  }
-}
-
-.card-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-    
   </style>
 </head>
 
@@ -305,31 +298,36 @@ body::after {
       </div>
 
       <section class="grid">
-        <div class="card">
-          <div class="card-title">About</div>
-          <div class="card-text">
-            <span class="name">Apollo</span>
-            <span class="muted">public alias</span>
-
-            <span class="name">Kosmic Kodex</span>
-            <span class="muted">development handle</span>
-          </div>
-        </div>
         <a href="/about.html" class="card-link">
-        <div class="card">
-          <div class="card-title">Contact</div>
-          <div class="card-text">
-            <a href="mailto:apollo@avaloris.net">apollo@avaloris.net</a>
-          </div>
-        </div>
+          <div class="card">
+            <div class="card-title">About</div>
+            <div class="card-text">
+              <span class="name">Apollo</span>
+              <span class="muted">public alias</span>
 
-        <div class="card">
-          <div class="card-title">Work</div>
-          <div class="card-text">
-            Systems, tools, experiments, and future projects will live here over time.
+              <span class="name">Kosmic Kodex</span>
+              <span class="muted">development handle</span>
+            </div>
           </div>
         </a>
-        </div>
+
+        <a href="/contact.html" class="card-link">
+          <div class="card">
+            <div class="card-title">Contact</div>
+            <div class="card-text">
+              apollo@avaloris.net
+            </div>
+          </div>
+        </a>
+
+        <a href="/work.html" class="card-link">
+          <div class="card">
+            <div class="card-title">Work</div>
+            <div class="card-text">
+              Systems, tools, experiments, and future projects will live here over time.
+            </div>
+          </div>
+        </a>
       </section>
 
       <section class="guestbook">
