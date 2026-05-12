@@ -6,9 +6,7 @@
   <title>Avaloris</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -52,8 +50,7 @@
       max-width: 920px;
       padding: 42px;
       border-radius: 24px;
-      background:
-        linear-gradient(180deg, rgba(22,31,52,0.86), rgba(10,14,24,0.92));
+      background: linear-gradient(180deg, rgba(22,31,52,0.86), rgba(10,14,24,0.92));
       border: 1px solid rgba(140,170,255,0.22);
       box-shadow:
         0 0 90px rgba(88,166,255,0.12),
@@ -99,8 +96,7 @@
       min-height: 155px;
       padding: 24px;
       border-radius: 18px;
-      background:
-        linear-gradient(180deg, rgba(30,40,62,0.78), rgba(14,20,32,0.92));
+      background: linear-gradient(180deg, rgba(30,40,62,0.78), rgba(14,20,32,0.92));
       border: 1px solid rgba(255,255,255,0.08);
       transition: 0.25s ease;
     }
@@ -111,7 +107,7 @@
       box-shadow: 0 0 30px rgba(88,166,255,0.08);
     }
 
-    .card-title {
+    .card-title, .section-title {
       color: #8b9ab2;
       font-size: 12px;
       text-transform: uppercase;
@@ -138,6 +134,89 @@
       margin-bottom: 14px;
     }
 
+    .guestbook {
+      margin-top: 30px;
+      padding: 24px;
+      border-radius: 18px;
+      background: rgba(17,24,35,0.55);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .guestbook-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .guestbook-top a {
+      font-size: 13px;
+      color: #a9ffe8;
+    }
+
+    .guestbook-form {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .guestbook-form input,
+    .guestbook-form textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 12px;
+      background: rgba(14,20,32,0.9);
+      color: #eef4ff;
+      padding: 12px;
+      font: inherit;
+    }
+
+    .guestbook-form textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .guestbook-form button {
+      justify-self: start;
+      border: 1px solid rgba(127,255,212,0.24);
+      border-radius: 999px;
+      background: rgba(127,255,212,0.06);
+      color: #a9ffe8;
+      padding: 9px 14px;
+      cursor: pointer;
+    }
+
+    .guestbook-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .guestbook-entry {
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(10,14,24,0.52);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .guestbook-entry strong {
+      display: block;
+      color: #f4f7ff;
+      margin-bottom: 4px;
+    }
+
+    .guestbook-entry p {
+      margin: 0;
+      color: #b9c4d6;
+      line-height: 1.6;
+    }
+
+    .entry-time {
+      margin-top: 8px;
+      color: #7f8ca0;
+      font-size: 12px;
+    }
+
     .visitor-line {
       display: inline-block;
       margin-top: 24px;
@@ -156,9 +235,7 @@
       text-decoration: none;
     }
 
-    a:hover {
-      text-decoration: underline;
-    }
+    a:hover { text-decoration: underline; }
 
     footer {
       margin-top: 18px;
@@ -169,17 +246,10 @@
     }
 
     @media (max-width: 700px) {
-      .page {
-        align-items: flex-start;
-      }
-
-      .container {
-        padding: 30px;
-      }
-
-      h1 {
-        letter-spacing: 5px;
-      }
+      .page { align-items: flex-start; }
+      .container { padding: 30px; }
+      h1 { letter-spacing: 5px; }
+      .guestbook-top { align-items: flex-start; flex-direction: column; }
     }
   </style>
 </head>
@@ -222,22 +292,22 @@
         </div>
       </section>
 
-      <section class="guestbook-preview">
-  <div class="section-heading">
-    <span>Guestbook</span>
-    <a href="/guestbook.html">View all</a>
-  </div>
+      <section class="guestbook">
+        <div class="guestbook-top">
+          <div class="section-title">Guestbook</div>
+          <a href="/guestbook.html">View all signatures</a>
+        </div>
 
-  <form id="guestbook-form" class="guestbook-form">
-    <input id="guestbook-name" type="text" maxlength="32" placeholder="Name" required />
-    <textarea id="guestbook-message" maxlength="160" placeholder="Leave a quick message..." required></textarea>
-    <button type="submit">Sign guestbook</button>
-  </form>
+        <form id="guestbook-form" class="guestbook-form">
+          <input id="guestbook-name" type="text" maxlength="32" placeholder="Name" required />
+          <textarea id="guestbook-message" maxlength="160" placeholder="Leave a quick message..." required></textarea>
+          <button type="submit">Sign guestbook</button>
+        </form>
 
-  <div id="guestbook-latest" class="guestbook-list">
-    Loading signatures...
-  </div>
-</section>
+        <div id="guestbook-latest" class="guestbook-list">
+          Loading signatures...
+        </div>
+      </section>
 
       <div class="visitor-line" id="visitor-count">
         Loading visitor count...
@@ -250,7 +320,60 @@
   </div>
 
   <script>
-    fetch("https://visitor-counter.kodyleem98.workers.dev")
+    const visitorUrl = "https://visitor-counter.kodyleem98.workers.dev";
+    const guestbookUrl = "PASTE_YOUR_GUESTBOOK_WORKER_URL_HERE";
+
+    function formatTime(timestamp) {
+      const date = new Date(timestamp);
+
+      const exact = date.toLocaleString([], {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+      });
+
+      const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const days = Math.floor(hours / 24);
+
+      let ago = "just now";
+      if (days > 0) ago = `${days} day${days === 1 ? "" : "s"} ago`;
+      else if (hours > 0) ago = `${hours} hour${hours === 1 ? "" : "s"} ago`;
+      else if (minutes > 0) ago = `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
+
+      return `${exact} • ${ago}`;
+    }
+
+    function escapeHTML(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderEntries(entries, targetId) {
+      const target = document.getElementById(targetId);
+
+      if (!entries.length) {
+        target.textContent = "No signatures yet.";
+        return;
+      }
+
+      target.innerHTML = entries.map(entry => `
+        <div class="guestbook-entry">
+          <strong>${escapeHTML(entry.name)}</strong>
+          <p>${escapeHTML(entry.message)}</p>
+          <div class="entry-time">${formatTime(entry.createdAt)}</div>
+        </div>
+      `).join("");
+    }
+
+    fetch(visitorUrl)
       .then(response => response.text())
       .then(text => {
         document.getElementById("visitor-count").textContent = text;
@@ -258,6 +381,43 @@
       .catch(() => {
         document.getElementById("visitor-count").textContent = "Visitor count unavailable.";
       });
+
+    fetch(`${guestbookUrl}/latest`)
+      .then(response => response.json())
+      .then(entries => renderEntries(entries, "guestbook-latest"))
+      .catch(() => {
+        document.getElementById("guestbook-latest").textContent = "Guestbook unavailable.";
+      });
+
+    document.getElementById("guestbook-form").addEventListener("submit", event => {
+      event.preventDefault();
+
+      const name = document.getElementById("guestbook-name").value;
+      const message = document.getElementById("guestbook-message").value;
+
+      fetch(`${guestbookUrl}/sign`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, message })
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.error) {
+            alert(data.error);
+            return;
+          }
+
+          document.getElementById("guestbook-form").reset();
+          return fetch(`${guestbookUrl}/latest`)
+            .then(response => response.json())
+            .then(entries => renderEntries(entries, "guestbook-latest"));
+        })
+        .catch(() => {
+          alert("Could not sign guestbook.");
+        });
+    });
   </script>
 </body>
 </html>
