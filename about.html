@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About — Avaloris</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #eef4ff;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(90,140,255,0.30), transparent 38%),
+        radial-gradient(circle at 82% 18%, rgba(180,90,255,0.20), transparent 34%),
+        radial-gradient(circle at 50% 100%, rgba(0,255,200,0.10), transparent 36%),
+        linear-gradient(180deg, #10172a 0%, #070b14 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.35;
+      background-image:
+        radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.65), transparent),
+        radial-gradient(1px 1px at 80% 20%, rgba(127,255,212,0.45), transparent),
+        radial-gradient(1px 1px at 60% 80%, rgba(88,166,255,0.55), transparent),
+        radial-gradient(1px 1px at 40% 60%, rgba(215,120,255,0.45), transparent),
+        radial-gradient(1px 1px at 75% 75%, rgba(255,255,255,0.45), transparent);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: -15%;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 10% 20%, rgba(88,166,255,0.24), transparent 28%),
+        radial-gradient(ellipse at 90% 25%, rgba(180,90,255,0.22), transparent 30%),
+        radial-gradient(ellipse at 20% 85%, rgba(127,255,212,0.18), transparent 28%),
+        radial-gradient(ellipse at 85% 80%, rgba(88,166,255,0.18), transparent 30%);
+      filter: blur(70px) saturate(145%);
+      opacity: 0.95;
+      animation: auroraOrbit 9s ease-in-out infinite alternate;
+    }
+
+    @keyframes auroraOrbit {
+      0% { transform: translate3d(-3%, -2%, 0) scale(1.02); }
+      50% { transform: translate3d(3%, 2%, 0) scale(1.08); }
+      100% { transform: translate3d(-2%, 3%, 0) scale(1.04); }
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 40px 22px;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 42px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(22,31,52,0.86), rgba(10,14,24,0.92));
+      border: 1px solid rgba(140,170,255,0.22);
+      box-shadow:
+        0 0 90px rgba(88,166,255,0.12),
+        0 0 150px rgba(180,90,255,0.06),
+        inset 0 0 35px rgba(255,255,255,0.018);
+      backdrop-filter: blur(16px);
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 24px;
+      color: #a9ffe8;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .back:hover { text-decoration: underline; }
+
+    .eyebrow {
+      color: #9badc8;
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(44px, 9vw, 76px);
+      line-height: 1;
+      letter-spacing: 8px;
+      color: white;
+      text-shadow:
+        0 0 24px rgba(88,166,255,0.28),
+        0 0 62px rgba(88,166,255,0.12);
+    }
+
+    .tagline {
+      margin: 22px 0 34px;
+      max-width: 700px;
+      color: #b1bdcf;
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    .sections {
+      display: grid;
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .section {
+      padding: 24px;
+      border-radius: 18px;
+      background: rgba(17,24,35,0.62);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .section-title {
+      color: #8b9ab2;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      margin-bottom: 14px;
+    }
+
+    .section p {
+      margin: 0;
+      color: #dce6f5;
+      line-height: 1.8;
+    }
+
+    .section p + p {
+      margin-top: 14px;
+    }
+
+    .note {
+      color: #95a2b8;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    footer {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      color: #7f8ca0;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      .container { padding: 30px; }
+      h1 { letter-spacing: 4px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <main class="container">
+      <a class="back" href="/">← Back to Avaloris</a>
+
+      <div class="eyebrow">About / Apollo</div>
+
+      <h1>ABOUT</h1>
+
+      <div class="tagline">
+        A place to collect the parts of myself that do not fit cleanly into a profile box.
+      </div>
+
+      <div class="sections">
+        <section class="section">
+          <div class="section-title">Who I Am</div>
+          <p>
+            Write a short version of who you are here. This does not need to be a résumé.
+            Keep it honest, simple, and human.
+          </p>
+        </section>
+
+        <section class="section">
+          <div class="section-title">Apollo</div>
+          <p>
+            Explain what Apollo means to you as an online identity. Is it just a nickname?
+            A persona? A cleaner public-facing name?
+          </p>
+        </section>
+
+        <section class="section">
+          <div class="section-title">Kosmic Kodex</div>
+          <p>
+            Write about this as your development handle. This can be where you talk about
+            learning, experimenting, building small things, and figuring out technology.
+          </p>
+        </section>
+
+        <section class="section">
+          <div class="section-title">What I Like</div>
+          <p>
+            List the kinds of things you are drawn to: retro tech, atmospheric games,
+            privacy, Linux, dark interfaces, worldbuilding, music, old web energy,
+            whatever feels true.
+          </p>
+        </section>
+
+        <section class="section">
+          <div class="section-title">Why This Site Exists</div>
+          <p>
+            Explain why you made Avaloris. Maybe it is a home base, a lab, an archive,
+            a creative space, or just your own corner of the internet.
+          </p>
+        </section>
+
+        <section class="section">
+          <div class="section-title">Currently</div>
+          <p class="note">
+            Learning: web basics, Cloudflare Workers, privacy tools, and how to make small things that feel personal.
+          </p>
+        </section>
+      </div>
+
+      <footer>
+        Built on Cloudflare Pages • No tracking • No analytics
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
