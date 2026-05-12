@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Avaloris Guestbook</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #eef4ff;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(90,140,255,0.30), transparent 38%),
+        radial-gradient(circle at 82% 18%, rgba(180,90,255,0.20), transparent 34%),
+        linear-gradient(180deg, #10172a 0%, #070b14 100%);
+      padding: 40px 22px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 42px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(22,31,52,0.86), rgba(10,14,24,0.92));
+      border: 1px solid rgba(140,170,255,0.22);
+      box-shadow: 0 0 90px rgba(88,166,255,0.12);
+    }
+
+    a {
+      color: #8ec5ff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 24px;
+      color: #a9ffe8;
+      font-size: 14px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(38px, 8vw, 68px);
+      letter-spacing: 6px;
+      color: white;
+    }
+
+    .subtitle {
+      color: #b1bdcf;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .guestbook-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .guestbook-entry {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(17,24,35,0.72);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .guestbook-entry strong {
+      display: block;
+      color: #f4f7ff;
+      margin-bottom: 5px;
+    }
+
+    .guestbook-entry p {
+      margin: 0;
+      color: #b9c4d6;
+      line-height: 1.6;
+    }
+
+    .entry-time {
+      margin-top: 8px;
+      color: #7f8ca0;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <a class="back" href="/">← Back to Avaloris</a>
+
+    <h1>GUESTBOOK</h1>
+
+    <div class="subtitle">
+      Every signature left behind.
+    </div>
+
+    <div id="guestbook-all" class="guestbook-list">
+      Loading signatures...
+    </div>
+  </main>
+
+  <script>
+    const guestbookUrl = "https://avaloris-guestbook.kodyleem98.workers.dev";
+
+    function formatTime(timestamp) {
+      const date = new Date(timestamp);
+
+      const exact = date.toLocaleString([], {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+      });
+
+      const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const days = Math.floor(hours / 24);
+
+      let ago = "just now";
+      if (days > 0) ago = `${days} day${days === 1 ? "" : "s"} ago`;
+      else if (hours > 0) ago = `${hours} hour${hours === 1 ? "" : "s"} ago`;
+      else if (minutes > 0) ago = `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
+
+      return `${exact} • ${ago}`;
+    }
+
+    function escapeHTML(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderEntries(entries) {
+      const target = document.getElementById("guestbook-all");
+
+      if (!entries.length) {
+        target.textContent = "No signatures yet.";
+        return;
+      }
+
+      target.innerHTML = entries.map(entry => `
+        <div class="guestbook-entry">
+          <strong>${escapeHTML(entry.name)}</strong>
+          <p>${escapeHTML(entry.message)}</p>
+          <div class="entry-time">${formatTime(entry.createdAt)}</div>
+        </div>
+      `).join("");
+    }
+
+    fetch(`${guestbookUrl}/all`)
+      .then(response => response.json())
+      .then(entries => renderEntries(entries))
+      .catch(() => {
+        document.getElementById("guestbook-all").textContent = "Guestbook unavailable.";
+      });
+  </script>
+</body>
+</html>
