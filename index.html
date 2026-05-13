@@ -358,100 +358,100 @@
     </main>
   </div>
 
-  <script>
-    const visitorUrl = "https://visitor-counter.kodyleem98.workers.dev";
-    const guestbookUrl = "https://avaloris-guestbook.kodyleem98.workers.dev";
+<script>
+  const visitorUrl = "https://counter.avaloris.net";
+  const guestbookUrl = "https://guestbook.avaloris.net";
 
-    function formatTime(timestamp) {
-      const date = new Date(timestamp);
+  function formatTime(timestamp) {
+    const date = new Date(timestamp);
 
-      const exact = date.toLocaleString([], {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-        hour: "numeric",
-        minute: "2-digit"
-      });
-
-      const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
-      const minutes = Math.floor(seconds / 60);
-      const hours = Math.floor(minutes / 60);
-      const days = Math.floor(hours / 24);
-
-      let ago = "just now";
-      if (days > 0) ago = `${days} day${days === 1 ? "" : "s"} ago`;
-      else if (hours > 0) ago = `${hours} hour${hours === 1 ? "" : "s"} ago`;
-      else if (minutes > 0) ago = `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
-
-      return `${exact} • ${ago}`;
-    }
-
-    function escapeHTML(value) {
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-    function renderEntries(entries, targetId) {
-      const target = document.getElementById(targetId);
-
-      if (!entries.length) {
-        target.textContent = "No signatures yet.";
-        return;
-      }
-
-      target.innerHTML = entries.map(entry => `
-        <div class="guestbook-entry">
-          <strong>${escapeHTML(entry.name)}</strong>
-          <p>${escapeHTML(entry.message)}</p>
-          <div class="entry-time">${formatTime(entry.createdAt)}</div>
-        </div>
-      `).join("");
-    }
-
-    fetch(visitorUrl)
-      .then(response => response.text())
-      .then(text => {
-        document.getElementById("visitor-count").textContent = text;
-      });
-
-    fetch(`${guestbookUrl}/latest`)
-      .then(response => response.json())
-      .then(entries => renderEntries(entries, "guestbook-latest"))
-      .catch(() => {
-        document.getElementById("guestbook-latest").textContent = "Guestbook unavailable.";
-      });
-
-    document.getElementById("guestbook-form").addEventListener("submit", event => {
-      event.preventDefault();
-
-      const name = document.getElementById("guestbook-name").value;
-      const message = document.getElementById("guestbook-message").value;
-
-      fetch(`${guestbookUrl}/sign`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ name, message })
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data.error) {
-            alert(data.error);
-            return;
-          }
-
-          document.getElementById("guestbook-form").reset();
-
-          return fetch(`${guestbookUrl}/latest`)
-            .then(response => response.json())
-            .then(entries => renderEntries(entries, "guestbook-latest"));
-        });
+    const exact = date.toLocaleString([], {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit"
     });
-  </script>
+
+    const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    let ago = "just now";
+    if (days > 0) ago = `${days} day${days === 1 ? "" : "s"} ago`;
+    else if (hours > 0) ago = `${hours} hour${hours === 1 ? "" : "s"} ago`;
+    else if (minutes > 0) ago = `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
+
+    return `${exact} • ${ago}`;
+  }
+
+  function escapeHTML(value) {
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function renderEntries(entries, targetId) {
+    const target = document.getElementById(targetId);
+
+    if (!entries.length) {
+      target.textContent = "No signatures yet.";
+      return;
+    }
+
+    target.innerHTML = entries.map(entry => `
+      <div class="guestbook-entry">
+        <strong>${escapeHTML(entry.name)}</strong>
+        <p>${escapeHTML(entry.message)}</p>
+        <div class="entry-time">${formatTime(entry.createdAt)}</div>
+      </div>
+    `).join("");
+  }
+
+  fetch(visitorUrl)
+    .then(response => response.text())
+    .then(text => {
+      document.getElementById("visitor-count").textContent = text;
+    });
+
+  fetch(`${guestbookUrl}/latest`)
+    .then(response => response.json())
+    .then(entries => renderEntries(entries, "guestbook-latest"))
+    .catch(() => {
+      document.getElementById("guestbook-latest").textContent = "Guestbook unavailable.";
+    });
+
+  document.getElementById("guestbook-form").addEventListener("submit", event => {
+    event.preventDefault();
+
+    const name = document.getElementById("guestbook-name").value;
+    const message = document.getElementById("guestbook-message").value;
+
+    fetch(`${guestbookUrl}/sign`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ name, message })
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
+
+        document.getElementById("guestbook-form").reset();
+
+        return fetch(`${guestbookUrl}/latest`)
+          .then(response => response.json())
+          .then(entries => renderEntries(entries, "guestbook-latest"));
+      });
+  });
+</script>
 </body>
 </html>
